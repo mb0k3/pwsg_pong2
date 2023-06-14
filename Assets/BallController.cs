@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public Rigidbody2D rb2D;
-    public float speed = 5f;
+    private Rigidbody2D rb2D;
+    public float speed = 10f;
     public Vector3 vel;
     
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class BallController : MonoBehaviour
     {
         Vector3 velocity = new Vector3();
         velocity.x = Random.Range(-1f, 1f);
-        velocity.y = Random.Range(-1f, 1f);
+        velocity.y = Random.value < .5f ? Random.Range(-1f, -.5f) : Random.Range(.5f, 1f);
 
         return shouldReturnNormalized ? velocity.normalized : velocity;
 
@@ -45,18 +45,27 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Vector3 newVelocity = vel;
-        newVelocity += new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
+        newVelocity += new Vector3(Random.Range(-0.5f, 3f), Random.Range(-0.5f, 3f));
         rb2D.velocity = Vector3.Reflect(newVelocity, collision.contacts[0].normal);
         vel = rb2D.velocity;
     }
-
+    //scoring system
+    private int player1Score;
+    private int player2Score;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (transform.position.x > 0)
+        {
+            player1Score++;
             print("Left Player +1");
+        }
 
         if (transform.position.x < 0)
+        {
+            player2Score++;
             print("Right Player +1");
+        }
+            
 
         ResetAndSendBallInRandomDirection();
     }
