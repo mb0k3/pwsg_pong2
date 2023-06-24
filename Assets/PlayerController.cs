@@ -8,16 +8,18 @@ public class PlayerController : MonoBehaviour
     public KeyCode upKey;
     public KeyCode downKey;
     public KeyCode shootKey;
-    public KeyCode shiedlKey;
+    public KeyCode shieldKey;
 
-    [SerializeField] private GameObject bulletPrefab;
+    public GameObject bulletPrefab;
+    public GameObject shieldPrefab;
+
     public Transform firingPoint;
     [Range(0.1f, 2f)]
     public float fireRate = 0.5f;
     private float fireTimer;
 
-    public float cooldownTime = 20;
-    private float nextFireTime = 10;
+    public float cooldownTime = 10;
+    private float nextFireTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +51,7 @@ public class PlayerController : MonoBehaviour
         //shield ability
         if (Time.time > nextFireTime)
         {
-            if (Input.GetKeyDown(shiedlKey))
+            if (Input.GetKeyDown(shieldKey))
             {
                 print("shield used, cooldown started");
                 Shield();
@@ -57,12 +59,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void Shoot()
+    public void Shoot()
     {
         Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
     }
     private void Shield()
     {
-        Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+        Instantiate(shieldPrefab, firingPoint.position, firingPoint.rotation);
     }
 }

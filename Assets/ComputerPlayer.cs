@@ -7,6 +7,7 @@ public class ComputerPlayer : MonoBehaviour
     public Rigidbody2D ball;
     public float speed = 40f; 
     protected Rigidbody2D rb2D;
+
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -28,6 +29,7 @@ public class ComputerPlayer : MonoBehaviour
         {
             if (this.transform.position.y > 0f)
             {
+               // player.Shoot();
                 rb2D.AddForce(Vector3.down * this.speed); }
             else if (this.transform.position.y < 0f)
             {

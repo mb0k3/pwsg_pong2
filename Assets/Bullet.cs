@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [Range(10, 100)]
+    [Range(0, 100)]
     public float speed = 10f;
 
     [Range(0.01f, 10)]
