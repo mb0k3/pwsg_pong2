@@ -52,11 +52,16 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(shiedlKey))
             {
                 print("shield used, cooldown started");
+                Shield();
                 nextFireTime= Time.time + cooldownTime;
             }
         }
     }
     private void Shoot()
+    {
+        Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+    }
+    private void Shield()
     {
         Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
     }

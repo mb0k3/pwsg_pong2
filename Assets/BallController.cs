@@ -7,6 +7,8 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb2D;
     public float speed = 10f;
     public Vector3 vel;
+
+    public ScoreManager scoreManager;
     
     // Start is called before the first frame update
     void Start()
@@ -50,19 +52,19 @@ public class BallController : MonoBehaviour
         vel = rb2D.velocity;
     }
     //scoring system
-    private int player1Score;
-    private int player2Score;
+    /*private int player1Score;
+    private int player2Score;*/
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (transform.position.x > 0)
         {
-            player1Score++;
+            scoreManager.IncrementLeftPlayerScore();
             print("Left Player +1");
         }
 
         if (transform.position.x < 0)
         {
-            player2Score++;
+            scoreManager.IncrementRightPlayerScore();
             print("Right Player +1");
         }
             
